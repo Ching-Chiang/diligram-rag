@@ -1,0 +1,7 @@
+# 统一使用 LF，避免 Windows 下的行尾噪声
+* text=auto eol=lf
+
+# 索引与数据库产物视为二进制
+*.faiss binary
+*.sqlite binary
+*.duckdb binary
