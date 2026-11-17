@@ -1,0 +1,29 @@
+# 检索与生成配置示例（复制为 configs/local.yaml 后修改）
+#
+# 原则：评测相关的取值（top_k、最大跳数）必须写进实验记录，
+# 并与 docs/eval.md 中的消融项对应，不能靠手调后不记录。
+
+corpus:
+  # 由 diligram-ocr-vlm 生产的 doc.schema.json 产物目录
+  documents_dir: null
+  expected_schema_version: "0.1"   # 不匹配则拒绝索引
+
+index:
+  unit: block                      # block | section（section 为待验证选项）
+  store: null                      # 如 faiss / qdrant / duckdb-fts
+  embedding_model: null
+
+retrieval:
+  top_k: 10
+  semantic_weight: 0.7
+  graph_enabled: true              # 关联/图查询开关，消融时置 false
+  max_hops: 3
+
+decomposition:
+  enabled: true                    # 消融时置 false（退化为单轮检索）
+  max_steps: 6
+
+generation:
+  model: null
+  temperature: 0.0
+  require_citations: true          # 无证据时必须走拒答分支
